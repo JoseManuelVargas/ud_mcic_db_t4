@@ -1,0 +1,12 @@
+\contentsline {paragraph}{Palabras clave:}{1}{section*.3}
+\contentsline {paragraph}{Keywords:}{1}{section*.4}
+\contentsline {section}{\'{I}ndice}{2}{section*.5}
+\contentsline {section}{\numberline {1}Requerimientos}{3}{section.1}
+\contentsline {section}{\numberline {2}Notas}{3}{section.2}
+\contentsline {section}{\numberline {3}Soluci\IeC {\'o}n}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Herramienta tecnol\IeC {\'o}gica}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Interfaz Gr\IeC {\'a}fica}{3}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Formato del archivo JSON}{3}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Inicio}{4}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Ingreso de relaci\IeC {\'o}n por archivo JSON}{4}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Ingreso de relaci\IeC {\'o}n de forma manual}{5}{subsubsection.3.2.4}
