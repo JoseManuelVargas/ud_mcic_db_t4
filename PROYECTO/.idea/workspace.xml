@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="945ea93a-0135-4bcd-ba7e-bf94ec341cb4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../MANUAL/manual_usuario.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../MANUAL/manual_usuario.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json/temp.json" beforeDir="false" afterPath="$PROJECT_DIR$/json/temp.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +173,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />

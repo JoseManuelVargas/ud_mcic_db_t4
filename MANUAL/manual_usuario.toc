@@ -10,3 +10,4 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Inicio}{4}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Ingreso de relaci\IeC {\'o}n por archivo JSON}{4}{subsubsection.3.2.3}
 \contentsline {subsubsection}{\numberline {3.2.4}Ingreso de relaci\IeC {\'o}n de forma manual}{5}{subsubsection.3.2.4}
+\contentsline {subsection}{\numberline {3.3}Determinar formas normales}{7}{subsection.3.3}
