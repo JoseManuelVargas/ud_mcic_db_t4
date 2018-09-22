@@ -1,0 +1,924 @@
+%%% Plantilla creada para Proyecto de Investigación
+%%% del Bachillerato de Excelencia, IES San Mateo, Madrid
+%%% Por Roberto Rodríguez del Río 
+%%% rrdelrio@ucm.es
+%%% Ver 1.0, Junio 2016
+\documentclass[a4paper,12pt]{article} 
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{color}
+\usepackage{titling}
+\usepackage{lipsum}
+\usepackage{tocbibind}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage{float}
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+
+\usepackage[left=3cm,right=3cm,top=3cm,bottom=4cm]{geometry}
+
+
+\pagestyle{fancy}
+
+
+%%% Para las cabeceras
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\headheight=50pt
+%%% 
+\newcommand{\vacio}{\textcolor{white}{holacaracola}}
+
+%%% Para que las ecuaciones se numeren
+%%% con el número de sección y el de ecuación.
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+
+% Color azul para algunos 
+% textos de la portada
+\definecolor{azulportada}{rgb}{0.16, 0.32, 0.75}
+
+%%%% Azul para textos de headings
+\definecolor{azulinterior}{rgb}{0.0, 0.2, 0.6}
+
+%%%%%%%%defniciones para codigo
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{blueviolet}{rgb}{0.54,0.17,0.89}
+\definecolor{Decorators}{rgb}{0.7,0,0.7}
+\definecolor{self}{rgb}{.87,.46,0}
+\definecolor{classname}{RGB}{101,0,67}
+\definecolor{methodname}{RGB}{4,7,98}
+\definecolor{characters}{RGB}{171,122,8}
+
+\maxdeadcycles=1000
+\extrafloats{100}
+
+\makeatletter
+\lstset{ %
+  frame=lines,
+  showlines=true,
+  showstringspaces=false, 
+  breaklines=true,
+  columns=fullflexible
+  tabsize=4,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1,  
+  % additional keywords
+  keywordstyle={[2]\color{Decorators}},
+  emph={self},
+  emphstyle={\color{self}\slshape},
+  emph={[2]{__init__}},
+  emphstyle=[2]{\color{blueviolet}\slshape},
+  emph={[2]{__init__, __doc__}},
+  emphstyle=[2]{\color{blueviolet}\slshape},
+  emph={[3]{RelationModel, IrreducibleFD, CandidatesKeys}},
+  emphstyle=[3]{\color{classname}\slshape},
+  emph={[4]{saveAsJson, loadSetsFromJson, __convertListToSets, calculateAttributeClosure, calculateAttributeClosure2, checkEquivalenceJson, checkEquivalence, __generateFDfromFD, saveIrreducibleFD, __calculateCanonicalCover, __validateDependencies, __setOneAttributeRight, __setIrreducibleAttributeLeft, __deleteExtraneousAttributes, __deleteRedundantFD, setAttributeSets, checkPrimaryKey, calculateCandidateKeys, getKeysAtLevel, checkIsSupperKey}},
+  emphstyle=[4]{\color{methodname}\slshape},
+  emph={[5]{as}},
+  emphstyle=[5]{\color{blue}\slshape},
+}
+
+
+\pretocmd\lst@makecaption{\noindent{\rule{\linewidth}{2pt}}}{}{}
+\makeatother
+
+\makeatletter
+\patchcmd{\@makecaption}
+  {\scshape}
+  {}
+  {}
+  {}
+\makeatother
+
+\makeatletter
+\patchcmd{\@makecaption}
+  {\\}
+  {.\ }
+  {}
+  {}
+\makeatother
+
+\renewcommand{\lstlistingname}{Programa}% Listing -> Programa
+
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%salida de consola%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Datos del proyecto %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%TÍTULO
+%%% Escribirlo en minúsculas, el programa
+%%% lo pondrá en mayúsculas en la portada.
+\title{Cálculo de Llaves}
+%%%% AUTOR
+\author{Laura Camila Scarpetta Rodríguez \\
+		\texttt{20172495016} \\
+		José Manuel Vargas Montero \\
+		\texttt{20172495017}}
+%%%%%%%%%%%%%%%%
+%%%%%% DIRECTOR DEL TRABAJO
+%%%%%%% Cambiar el nombre siguiente
+\newcommand{\director}{Roberto Pava Díaz }
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage} %%%%% Aquí no hay que tocar nada.
+	%%%% Las siguientes instrucciones generarán automáticamente
+	%%%% la portada de tu proyecto.
+	%%% Cambio de la estructura de esta página
+\newgeometry{left=0.6cm,top=1.3cm,bottom=1.2cm}
+
+\fbox{\parbox[c]{18.5cm}{
+\begin{center}
+\vspace{1.5cm}
+{\fontfamily{phv}\fontsize{24}{6}\selectfont{Universidad Distrital Francisco José de Caldas}}\\
+[1em]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Maestría en Ciencias de la Información y la Comunicación}}\\
+[1em]
+{\fontfamily{phv}\fontsize{26}{5}\selectfont{BASES DE DATOS}}\\
+[2.6cm]
+% Autor del trabajo de investigación
+\textcolor{azulportada}{\fontfamily{phv}\fontsize{16}{5}\selectfont{\theauthor}}\\
+[1cm]
+% Título del trabajo
+\textcolor{azulportada}
+{\fontfamily{phv}\fontsize{30}{5}\selectfont{\textsc{\thetitle}}}\\
+%{\Huge\textbf{\thetitle}}\\
+[1cm]
+\includegraphics[width=5.5cm]{Images/ud_escudo.png}
+\\[2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{Docente}}\\
+[0.5cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\director}}\\
+[2cm]
+{\fontfamily{phv}\fontsize{16}{5}\selectfont{\today}}\\
+[4cm]
+\end{center}
+}}
+ 
+ \restoregeometry
+ %%%% Volvemos a la estructura de la página normal
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{%\Large
+
+\newpage
+
+%%%Encabezamiento y pie de página
+%%% También se genera automáticamente
+%%% Mejor no tocarlo mucho.
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[R]{
+	\textcolor{azulinterior}{\fontfamily{phv}\fontsize{14}{4}\selectfont{\textbf{\thetitle}}}\\
+{\fontfamily{phv}\fontsize{10}{3}\selectfont{\theauthor}}}
+\fancyhead[L]{\vacio}
+
+\renewcommand{\footrulewidth}{0.5pt}
+\fancyfoot[L]{\footnotesize Maestría en Ciencias de la Información y la Comunicación --- Bases de Datos}
+\fancyfoot[C]{}
+\fancyfoot[R]{\footnotesize Página \thepage}
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+\
+
+\vacio
+
+\
+
+
+\subsection*{Resumen}
+En el presente informe encontrará un algoritmo que partiendo de una relación, con el conjunto de atributos $T$ y el de dependencias funcionales $L$, calcule el conjunto de las llaves candidatas.
+
+
+\subsection*{Abstract}
+\textsl{
+In the present report it is pretended to develop an algortih which is able to get the set of candidate keys from a Relation with its attributes set $T$ and functional dependencies $L$}
+
+\ %% Así hago que se abra más espacio entre renglones.
+
+\
+
+\hrule
+
+\
+
+\
+
+
+\paragraph{Palabras clave:} Dependencia funcional, conjuntos, llave candidata, llave primaria.
+
+\
+
+
+\paragraph{Keywords:} Functional dependence, sets, candidate key, primary key.
+
+
+
+
+
+
+
+\newpage
+
+%%% En esta página va el índice,
+%%% pero no hay que hacer nada porque 
+%%% se generará automáticamente.
+
+\tableofcontents
+
+\newpage
+
+
+
+\section{Requerimientos}
+\begin{enumerate}
+\item Taller 1 Finalizado.
+\item Implementar un algoritmo en paralelo para el calculo de llaves candidatas de una relación R(T,L).
+\end{enumerate}
+
+\section{Notas}
+
+\begin{enumerate}
+\item Actividad en grupos de máximo (4)  integrantes.
+\begin{enumerate}
+\item Nombre, código y Número de lista
+\item Un solo integrante realiza el envío en el aula virtual.
+\end{enumerate}
+\item Formato de entrega: 
+\begin{enumerate}
+\item Documento PDF.
+\begin{enumerate}
+\item Análisis, diseño e implementación del algoritmo.
+\end{enumerate}
+\item Código fuente: Jypiter Notebook (Python).
+\end{enumerate}
+\end{enumerate}
+
+\section{Solución}
+
+\subsection{Herramienta tecnológica}
+Para la solución del problema se decidió hacer uso del lenguaje de programación de Python. Para ello se utilizó el objeto set que Python tiene incorporada para trabajar conjuntos. Se utilizó PyCharm Community Edition 2018 como entorno de desarrollo, ya que las anteriores nos facilitan llegar a la solución del problema. 
+
+
+\subsection{Algoritmo}
+
+El algoritmo consta de diferentes etapas. Entre ellas están, el cálculo de la cobertura mínima de la relación (se utiliza el algoritmo desarrollado en el Taller 1), calcular los tres conjuntos de atributos, revisar si existe llave primaria, calcular las diferentes llaves candidatas.
+
+\subsubsection{Cálculo de los tres conjuntos de atributos}
+Estos tres conjuntos son los siguientes
+\begin{enumerate}
+\item Atributos estrictamente necesarios. Se componen de los atributos que están únicamente en el lado izquierdo de las dependencias (implicantes), y aquellos que no están en ninguna dependencia.
+\item Atributos innecesarios. Se compone de los atributos que están únicamente en el lado derecho de las dependencias, es decir, aquellos que sólo son implicados.
+\item Atributos posibles. Son aquellos que no pertenecen a ninguno de los conjuntos anteriores.
+\end{enumerate}
+
+\subsubsection{Revisar si existe llave primaria}
+Esto consiste en calcular el cierre de los atributos del primer conjunto. Si este es igual al conjunto de atributos $T$, se dice que hay una llave primaria y se detiene el algoritmo.
+
+\subsubsection{Calcular llaves candidatas}
+Esto se realiza con el siguiente proceso:
+\begin{enumerate}
+\item Se calcula los atributos base para el cálculo de las llaves candidatas. Este es el conjunto $T$ menos la unión entre el cierre del primer conjunto con el segundo.
+\item La longitud del conjunto anterior es el número de niveles. Entiéndase esto como los elementos que se pueden combinar.
+\item Se une los atributos del conjunto de los atributos necesarios con cada atributo en el conjunto base. 
+\item A cada combinación se le pide calcular las combinaciones por niveles. A cada una de ellas se les valida si no son posibles super llaves. En caso que no, se calcula su cierre. Si es igual a $T$, se determina es una llave candidata.
+\item El proceso anterior se repite para cada nivel, empezando por el menor hacia el mayor. Esto asegura se evite realizar el proceso para las posibles super llaves.
+
+\end{enumerate}
+
+NOTA: El numeral 4. se realiza utilizando hilos de programación. Esto es debido a que son procesos independientes.
+
+\subsection{Casos de Prueba}
+
+\begin{itemize}
+\item Se probó con un el conjunto de dependencias funcionales estudiado en clase, comprobando las llaves candidatas.
+\item Se probó con una relación que tiene llave primaria.
+\item Se agregó un atributo al conjunto $T$ a la relación anterior y se probó el cambio.
+\item Se validó con una relación que tiene varias llaves candidatas.
+\item Se agregó un atributo al conjunto $T$ a la relación anterior y se probó el cambio.
+\end{itemize}
+
+
+\subsection{Programa desarrollado}
+
+En esta sección se explica el código desarrollado en Python para resolver el presente problema.
+\\
+El código consta principalmente de una clase que modela una relación. Contiene como atributos el conjunto de dependencias funcionales $L$ y el conjunto de atributos $T$. Como métodos uno para cargar su información de un archivo JSON y otro para guardar en el mismo tipo de archivo. Contiene otro método interno para convertir listas a conjuntos, y  tuplas.
+\\
+El código se muestra a continuación.
+
+\begin{lstlisting}[language=python, caption={Clase que modela las relaciones.\\\hspace{\textwidth}}, captionpos=t]
+import json
+
+class RelationModel:
+    '''
+    Esta clase modela una relarion de la forma:
+    R = (T,L)
+    Donde R: es la relacion
+    T: es el conjunto de atributos
+    L: es el conjunto de dependencias funcionales
+    '''
+    def __init__(self):
+        self.t_set = set()
+        self.l_set = set()
+
+    def saveAsJson(self, json_path: str):
+        self.l_set = list(self.l_set)
+        self.t_set = list(self.t_set)
+        json_string = json.dumps(self.__dict__)
+        with open(json_path, "w") as file:
+            file.write(json_string)
+        self.__convertListToSets()
+
+    def loadSetsFromJson(self, data: dict):
+        if "t_set" in data.keys():
+            self.t_set = data["t_set"]
+        else:
+            raise Exception('No se encontró conjunto T en el archivo Json. "t_set"')
+        if "l_set" in data.keys():
+            self.l_set = data["l_set"]
+        else:
+            raise Exception('No se encontró conjunto L en el archivo Json. "l_set"')
+        self.__convertListToSets()
+
+    def __convertListToSets(self):
+        self.t_set = set(self.t_set)
+        self.l_set = set(tuple(element) for element in self.l_set)
+
+\end{lstlisting}
+
+El archivo JSON requerido debe tener la siguiente estructura (se usa la relación trabaja en clase como ejemplo):
+
+\begin{lstlisting}[language=python, caption={Estructura del archivo JSON.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["E", "A", "F", "B", "D", "C"], "l_set": [["A", "B"], ["B", "C"], ["B", "D"], ["C", "A"], ["A", "D"], ["AC", "E"], ["FB", "D"]]}
+\end{lstlisting}
+
+Posterior a ello están dos métodos para calcular el cierre de un atributo dado el conjunto de dependencias funcionales $L$. El primero realiza el algoritmo guardando una copia del conjunto anterior y haciendo lo paso a paso. El segundo utiliza una variable booleana y aumenta constantemente el cierre calculado. 
+\\
+Este último se ejecuta bastante más rápido que el primero. Este tiempo depende de diferentes factores.
+
+
+\begin{lstlisting}[language=python, caption={Algoritmo que calcula el cierre de una atributo guardando su estado anterior.\\\hspace{\textwidth}}, captionpos=t]
+def calculateAttributeClosure(attr: str, L: set):
+    '''
+    Este método calcula el cierre de un atributo para el
+    conjunto de dependencias funcionales L por medio del algoritmo
+    de cierre técnico
+    l_set: conjunto de dependencias funcionales
+    attr: atributo
+
+    Retorna un conjunto con todos los atributos del cierre de attr
+    '''
+    l_set = L.copy()
+    last_closure = set()
+    current_closure = set(attr)
+    while len(last_closure) < len(current_closure):
+        last_closure = current_closure.copy()
+        for element in l_set.copy():
+            if last_closure.issuperset(element[0]):
+                for character in element[1]:
+                    current_closure.add(character)
+                l_set.discard(element)
+    return current_closure
+\end{lstlisting}
+
+\begin{lstlisting}[language=python, caption={Algoritmo que calcula el cierre de una atributo utilizando una variable bool.\\\hspace{\textwidth}}, captionpos=t]
+def calculateAttributeClosure2(attr: str, L: set):
+    '''
+    Este método calcula el cierre de un atributo para el
+    conjunto de dependencias funcionales L por medio del algoritmo
+    de cierre técnico
+    l_set: conjunto de dependencias funcionales
+    attr: atributo
+
+    Retorna un conjunto con todos los atributos del cierre de attr
+    '''
+    l_set = L.copy()
+    is_closure_changed = True
+    current_closure = set(attr)
+    while is_closure_changed:
+        is_closure_changed = False
+        for element in l_set.copy():
+            if current_closure.issuperset(element[0]):
+                is_closure_changed = True
+                for character in element[1]:
+                    current_closure.add(character)
+                l_set.discard(element)
+    return current_closure
+
+\end{lstlisting}
+
+Finalmente está la clase que modela todo el objeto que calcula la cobertura mínima. En su constructor recibe la ruta al archivo JSON que contiene el conjunto de atributos $T$ y el conjunto de dependencias funcionales $L$.
+\\
+Una vez creado el objeto se calcula su cobertura mínima. Para ello cuenta con métodos internos que permiten ejecutar cada uno de los tres pasos, es decir, eliminar atributos extraños a izquierda y derecha, así como dependencias redundantes.
+\\
+Tiene otro método para guardar la cobertura mínima generada en un archivo JSON. Así como otros para validar si una dependencia funcional es equivalente a la generada.
+\\
+El código en python se muestra a continuación:
+
+
+\begin{lstlisting}[language=python, caption={Clase que calcula la cobertura mínima y valida conjuntos de dependencias equivalentes.\\\hspace{\textwidth}}, captionpos=t]
+class IrreducibleFD:
+    '''
+    Esta clase calcula el conjunto de cobertura minima de las dependencias funcionales
+    '''
+    def __init__(self, json_path: str):
+        data = dict()
+        try:
+            with open(json_path) as file:
+                data = json.load(file)
+        except Exception as ex:
+            print("Error leyendo archivo . Error: " + str(ex))
+            return
+        self.relation = RelationModel()
+        self.relation.loadSetsFromJson(data)
+        if not self.__validateDependencies(self.relation.t_set, self.relation.l_set):
+            raise Exception("El conjunto de dependencias L contiene atributos que no están en T")
+        self.irreducible_rel = RelationModel()
+        self.__calculateCanonicalCover()
+
+    def checkEquivalenceJson(self, json_path: str):
+        data = dict()
+        try:
+            with open(json_path) as file:
+                data = json.load(file)
+        except Exception as ex:
+            print("Error leyendo archivo . Error: " + str(ex))
+            return
+        new_relation = RelationModel()
+        new_relation.loadSetsFromJson(data)
+        self.checkEquivalence(new_relation.l_set)
+
+    def checkEquivalence(self, L: set):
+        l_set = L.copy()
+        if not self.__validateDependencies(self.relation.t_set, l_set):
+            print("El conjunto L contiene atributos que no están en T")
+            return False
+        l_set = self.__setOneAttributeRight(l_set)
+        l_set = self.__setIrreducibleAttributeLeft(l_set)
+        l_set = self.__deleteRedundantFD(l_set)
+        if not l_set == L:
+            print("El conjunto L no es una covertura mínima")
+            return False
+        if not self.__generateFDfromFD(l_set, self.irreducible_rel.l_set):
+            print("El conjunto L ingresado no genera al conjunto L de nuestra solución")
+            return False
+        if not self.__generateFDfromFD(self.irreducible_rel.l_set, l_set):
+            print("El conjunto L de nuestra solución no genera al conjunto L ingresado")
+            return  False
+        print("Si son dependencias funcionales equivalentes")
+        return True
+
+    def __generateFDfromFD(self, L_generated: set, L_used: set):
+        '''se genera el conjunto de dependencias funcionales
+        L_generated usando las dependencias funcionales del conjunto
+        L_used'''
+        for item in L_generated:
+            closure = calculateAttributeClosure2(item[0], L_used)
+            if not set(item[1]).issubset(closure):
+                return False
+        return True
+
+
+    def saveIrreducibleFD(self, json_path: str):
+        self.irreducible_rel.saveAsJson(json_path)
+
+
+    def __calculateCanonicalCover(self):
+        self.irreducible_rel.t_set = self.relation.t_set.copy()
+        self.irreducible_rel.l_set = self.__setOneAttributeRight(self.relation.l_set)
+        self.irreducible_rel.l_set = self.__setIrreducibleAttributeLeft(self.irreducible_rel.l_set)
+        self.irreducible_rel.l_set = self.__deleteRedundantFD(self.irreducible_rel.l_set)
+
+    def __validateDependencies(self, T: set, L: set):
+        for item in L:
+            if len(item) == 2:
+                for character in item[0]:
+                    if character not in T:
+                        return False
+                for character in item[1]:
+                    if character not in T:
+                        return False
+            else:
+                return False
+        return True
+
+
+    def __setOneAttributeRight(self, L: set):
+        """
+            ("fd[0]", "fd[1]")
+        """
+        func_dep = L.copy()
+        for fd in func_dep.copy():
+            if fd:
+                if len(fd[1]) < 1:
+                    func_dep.discard(fd)
+                else:
+                    if set(fd[1]).issubset(set(fd[0])):
+                        func_dep.discard(fd)
+                    else:
+                        func_dep.discard(fd)
+                        for character in fd[1]:
+                            if not set(character).issubset(set(fd[0])):
+                                func_dep.add((fd[0], character))
+            else:
+                func_dep.discard(df)
+        return func_dep
+
+
+    def __setIrreducibleAttributeLeft(self, L: set):
+        func_dep = L.copy()
+        l_set = set()
+        self.closure_dict = {}
+        for element in func_dep:
+            if len(element[0]) == 1:
+                l_set.add(element)
+            elif len(element[0]) > 1:
+                new_fd = self.__deleteExtraneousAttributes(L, element)
+                if new_fd:
+                    l_set.add(new_fd)
+        return  l_set
+
+
+    def __deleteExtraneousAttributes(self, L: set, func_dep: tuple):
+        is_irreducible = False
+        while not is_irreducible:
+            func_dep_copy = func_dep
+            is_irreducible = True
+            for character in func_dep_copy[0]:
+                new_implicating = str(func_dep_copy[0]).replace(character, '')
+                if new_implicating not in self.closure_dict:
+                    self.closure_dict[new_implicating] = calculateAttributeClosure2(new_implicating, L)
+                if func_dep_copy[1] in self.closure_dict[new_implicating]:
+                    func_dep = (func_dep[0].replace(character, ''), func_dep[1])
+                    if len(func_dep[0]) == 1:
+                        break
+                    is_irreducible = False
+        return func_dep
+
+    def __deleteRedundantFD(self, L: set):
+        l_copy = L.copy()
+        for element in L:
+            l_copy.discard(element)
+            closure = calculateAttributeClosure2(element[0], l_copy)
+            if element[1] not in closure:
+                l_copy.add(element)
+        return l_copy
+
+\end{lstlisting}
+
+El código para calcular las llaves primarias consta de una clase que contiene los métodos para realizar cada uno de los pasos mencionados, a saber:
+\begin{enumerate}
+\item Calcular la cobertura mínima.
+\item Calcular los tres conjuntos.
+\item Validar si existe llave primaria.
+\item Calcular las diferentes llaves candidatas usando hilos.
+\end{enumerate}
+
+El código se muestra a continuación:
+
+\begin{lstlisting}[language=python, caption={Algoritmo que calcula las llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+class CandidatesKeys:
+    '''
+    Esta clase calcula las llaves candidatas
+    dado un conjunto de relaciones. R (T,L).
+    Para ello hace uso de la clase IrreducibleFD, para
+    obtener el conjunto de cobertura mínima.
+
+    Se recomienda la siguiente página para realizar pruebas:
+        http://raymondcho.net/RelationalDatabaseTools/RelationalDatabaseTools
+    '''
+    def __init__(self, json_path: str):
+        self.minimal_cover = IrreducibleFD(json_path)
+        self.setAttributeSets()
+        if self.checkPrimaryKey():
+            print("Se encontró una llave primaria: {0}".format(self.necessary_attr_set))
+            self.candidate_keys = set()
+            self.candidate_keys.add(''.join(self.necessary_attr_set))
+            return
+        self.calculateCandidateKeys()
+
+
+    def setAttributeSets(self):
+        self.left_attr_set = set()
+        self.right_attr_set = set()
+        for item in self.minimal_cover.irreducible_rel.l_set:
+            for character in item[0]:
+                self.left_attr_set.add(character)
+            for character in item[1]:
+                self.right_attr_set.add(character)
+        self.necessary_attr_set = self.minimal_cover.relation.t_set.difference(self.right_attr_set)
+        self.useless_attr_set = self.minimal_cover.relation.t_set.difference(self.left_attr_set)
+        self.useless_attr_set = self.useless_attr_set.difference(self.necessary_attr_set)
+        aux_set = self.useless_attr_set.union(calculateAttributeClosure2("".join(self.necessary_attr_set), self.minimal_cover.irreducible_rel.l_set))
+        self.middle_attr_set = self.minimal_cover.relation.t_set.difference(aux_set)
+
+    def checkPrimaryKey(self):
+        necessary_closure = calculateAttributeClosure2("".join(self.necessary_attr_set), self.minimal_cover.irreducible_rel.l_set)
+        if necessary_closure == self.minimal_cover.relation.t_set:
+            return True
+        return  False
+
+    def calculateCandidateKeys(self):
+        self.middle_attr_list = list(self.middle_attr_set)
+        level_num = len(self.middle_attr_set)
+        self.candidate_keys = set()
+        self.necessary_attr_str = ''.join(self.necessary_attr_set)
+        thread_list = []
+        max_thread_len = 4
+        for i in range(level_num):
+            for j in range(len(self.middle_attr_list)):
+                if len(thread_list) >= max_thread_len:
+                    is_any_thread_finished = False
+                    while not is_any_thread_finished:
+                        for ck_thread in thread_list:
+                            if not ck_thread[0].is_alive():
+                                thread_list.pop(ck_thread[1])
+                                is_any_thread_finished = True
+                                break
+                        time.sleep(0.001)
+                new_thread = threading.Thread(target=self.getKeysAtLevel, kwargs={"level_num": i, "attr_index": j})
+                thread_list.append((new_thread, len(thread_list)))
+                new_thread.start()
+        for ck_thread in thread_list:
+            ck_thread[0].join()
+                #self.getKeysAtLevel(level_num=i, attr_index=j)
+
+    def getKeysAtLevel(self, level_num: int, attr_index: int):
+        middle_attr_copy = self.middle_attr_list[:]
+        attr = middle_attr_copy.pop(attr_index)
+        base_attr = self.necessary_attr_str + attr
+        if self.checkIsSupperKey(set(base_attr)):
+            return
+        attr_list = [base_attr]
+        for char in middle_attr_copy:
+            attr_list.append(char)
+        for combination in itertools.combinations(attr_list, level_num + 1):
+            if base_attr in combination:
+                if not self.checkIsSupperKey(set(combination)):
+                    combination_str = ''.join(combination)
+                    attr_closure = calculateAttributeClosure2(combination_str, self.minimal_cover.irreducible_rel.l_set)
+                    if attr_closure == self.minimal_cover.relation.t_set:
+                        self.candidate_keys.add(combination_str)
+
+    def checkIsSupperKey(self, key: set):
+        for item in self.candidate_keys:
+            if key.issubset(item):
+                return True
+        return False
+
+\end{lstlisting}
+
+Como se observa existe una validación que no permite generar más de un número determinado de hilos. Esto es debido a que, si bien el procesamiento en paralelo es una mejora en el desempeño, no se puede generar un número indefinido de hilos, ya que el sistema operativo terminará perdiendo más tiempo en la creación de los mismos, en el cambio de ejecución y variables en memoria de los mismos, que en realizar el algoritmo en sí. Esto se debe a que no existen esperas en ningún momento del algoritmo.
+
+\section{Pruebas realizadas}
+
+Como se observa en el comentario principal del código, se recomienda tener como referencia la siguiente \href{http://raymondcho.net/RelationalDatabaseTools/RelationalDatabaseTools}{\underline{página}} para validar los resultados obtenidos.
+
+\subsection{Conjunto $L$ explicado en clase}
+En esta prueba se calculan las llaves candidatas de la relación vista en clase.
+\\
+El archivo JSON tiene el siguiente contenido:
+
+\begin{lstlisting}[language=python, caption={Archivo JSON visto en clase.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["E", "A", "F", "B", "D", "C"], "l_set": [["A", "B"], ["B", "C"], ["B", "D"], ["C", "A"], ["A", "D"], ["AC", "E"], ["FB", "D"]]}
+\end{lstlisting}
+
+El código usado para la prueba fue el siguiente:
+
+\begin{lstlisting}[language=python, caption={Prueba con la relación de clase.\\\hspace{\textwidth}}, captionpos=t]
+import Include.Models as Models
+
+candidate_keys = Models.CandidatesKeys("json/relation_clase.json")
+print(candidate_keys.candidate_keys)
+print("T_set: " + str(candidate_keys.minimal_cover.relation.t_set))
+for element in candidate_keys.candidate_keys:
+    print(element + ": " + str(Models.calculateAttributeClosure2(element,candidate_keys.minimal_cover.irreducible_rel.l_set)))
+\end{lstlisting}
+Como se observa, en el código de prueba se calcula el cierre de cada llave candidata. Esto con el fin de asegurarnos genere el conjunto $T$.
+\\
+Y el resultado obtenido fue el siguiente:
+
+\begin{lstlisting}[language=bash, caption={Resultado de llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+{'FA', 'FB', 'FC'}
+T_set: {'A', 'F', 'C', 'E', 'D', 'B'}
+FA: {'A', 'F', 'C', 'E', 'D', 'B'}
+FB: {'A', 'F', 'C', 'E', 'D', 'B'}
+FC: {'A', 'F', 'C', 'E', 'D', 'B'}
+\end{lstlisting}
+
+\subsection{Conjunto $L$ con llave primaria}
+En esta prueba se calculan las llaves candidatas de una relación con llave primaria.
+\\
+El archivo JSON tiene el siguiente contenido:
+
+\begin{lstlisting}[language=python, caption={Archivo JSON con llave primaria.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["C", "E", "D", "B", "A", "F", "G"], "l_set": [["B", "E"], ["D", "E"], ["G", "F"], ["A", "E"], ["G", "E"], ["B", "F"], ["F", "A"]]}
+\end{lstlisting}
+
+El código usado para la prueba fue el siguiente:
+
+\begin{lstlisting}[language=python, caption={Prueba con una relación con llave primaria.\\\hspace{\textwidth}}, captionpos=t]
+import Include.Models as Models
+
+candidate_keys = Models.CandidatesKeys("json/relation_test.json")
+print(candidate_keys.candidate_keys)
+print("T_set: " + str(candidate_keys.minimal_cover.relation.t_set))
+for element in candidate_keys.candidate_keys:
+    print(element + ": " + str(Models.calculateAttributeClosure2(element,candidate_keys.minimal_cover.irreducible_rel.l_set)))
+
+\end{lstlisting}
+Como se observa, en el código de prueba se calcula el cierre de cada llave candidata. Esto con el fin de asegurarnos genere el conjunto $T$.
+\\
+Y el resultado obtenido fue el siguiente:
+
+\begin{lstlisting}[language=bash, caption={Resultado de llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+Se encontró una llave primaria: {'G', 'D', 'C', 'B'}
+{'GDCB'}
+T_set: {'E', 'C', 'F', 'B', 'D', 'G', 'A'}
+GDCB: {'C', 'E', 'F', 'B', 'D', 'G', 'A'}
+\end{lstlisting}
+
+
+\subsection{Conjunto $L$ con llave primaria, agregando atributo}
+En esta prueba se calculan las llaves candidatas de una relación con llave primaria, agregando un atributo al conjunto $T$.
+\\
+El archivo JSON tiene el siguiente contenido:
+
+\begin{lstlisting}[language=python, caption={Archivo JSON con llave primaria, agregando un atributo.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["C", "E", "D", "B", "A", "F", "G", "H"], "l_set": [["B", "E"], ["D", "E"], ["G", "F"], ["A", "E"], ["G", "E"], ["B", "F"], ["F", "A"]]}
+\end{lstlisting}
+
+El código usado para la prueba fue el siguiente:
+
+\begin{lstlisting}[language=python, caption={Prueba con una relación con llave primaria.\\\hspace{\textwidth}}, captionpos=t]
+import Include.Models as Models
+
+candidate_keys = Models.CandidatesKeys("json/relation_test.json")
+print(candidate_keys.candidate_keys)
+print("T_set: " + str(candidate_keys.minimal_cover.relation.t_set))
+for element in candidate_keys.candidate_keys:
+    print(element + ": " + str(Models.calculateAttributeClosure2(element,candidate_keys.minimal_cover.irreducible_rel.l_set)))
+
+\end{lstlisting}
+Como se observa, en el código de prueba se calcula el cierre de cada llave candidata. Esto con el fin de asegurarnos genere el conjunto $T$.
+\\
+Y el resultado obtenido fue el siguiente:
+
+\begin{lstlisting}[language=bash, caption={Resultado de llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+Se encontró una llave primaria: {'H', 'C', 'D', 'G', 'B'}
+{'HCDGB'}
+T_set: {'H', 'C', 'D', 'G', 'B', 'E', 'F', 'A'}
+HCDGB: {'H', 'C', 'D', 'G', 'B', 'E', 'F', 'A'}
+\end{lstlisting}
+
+\subsection{Conjunto $L$ con llaves candidatas}
+En esta prueba se calculan las llaves candidatas de una relación con varias llaves candidatas.
+\\
+Este ejercicio fue obtenido del siguiente \href{https://djitz.com/neu-mscs/how-to-find-candidate-keys/}{\underline{enlace}}.
+\\
+El archivo JSON tiene el siguiente contenido:
+
+\begin{lstlisting}[language=python, caption={Archivo JSON con varias llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["A", "B", "C", "D"], "l_set": [["ABC", "D"], ["D", "A"]]}
+\end{lstlisting}
+
+El código usado para la prueba fue el siguiente:
+
+\begin{lstlisting}[language=python, caption={Prueba con una relación con varias llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+import Include.Models as Models
+
+candidate_keys = Models.CandidatesKeys("json/relation_examp1.json")
+print(candidate_keys.candidate_keys)
+print("T_set: " + str(candidate_keys.minimal_cover.relation.t_set))
+for element in candidate_keys.candidate_keys:
+    print(element + ": " + str(Models.calculateAttributeClosure2(element,candidate_keys.minimal_cover.irreducible_rel.l_set)))
+
+\end{lstlisting}
+Como se observa, en el código de prueba se calcula el cierre de cada llave candidata. Esto con el fin de asegurarnos genere el conjunto $T$.
+\\
+Y el resultado obtenido fue el siguiente:
+
+\begin{lstlisting}[language=bash, caption={Resultado de llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+{'BCD', 'BCA'}
+T_set: {'B', 'A', 'C', 'D'}
+BCD: {'B', 'A', 'C', 'D'}
+BCA: {'B', 'A', 'C', 'D'}
+\end{lstlisting}
+
+\subsection{Conjunto $L$ con llaves candidatas, agregando un atributo}
+En esta prueba se calculan las llaves candidatas de una relación con varias llaves candidatas, agregando un atributo.
+\\
+Este ejercicio fue obtenido del siguiente \href{https://djitz.com/neu-mscs/how-to-find-candidate-keys/}{\underline{enlace}}.
+\\
+El archivo JSON tiene el siguiente contenido:
+
+\begin{lstlisting}[language=python, caption={Archivo JSON de relación con varias llaves candidatas, agregando un atributo.\\\hspace{\textwidth}}, captionpos=t]
+{"t_set": ["A", "B", "C", "D", "E"], "l_set": [["ABC", "D"], ["D", "A"]]}
+\end{lstlisting}
+
+El código usado para la prueba fue el siguiente:
+
+\begin{lstlisting}[language=python, caption={Prueba con una relación con varias llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+import Include.Models as Models
+
+candidate_keys = Models.CandidatesKeys("json/relation_examp1.json")
+print(candidate_keys.candidate_keys)
+print("T_set: " + str(candidate_keys.minimal_cover.relation.t_set))
+for element in candidate_keys.candidate_keys:
+    print(element + ": " + str(Models.calculateAttributeClosure2(element,candidate_keys.minimal_cover.irreducible_rel.l_set)))
+
+\end{lstlisting}
+Como se observa, en el código de prueba se calcula el cierre de cada llave candidata. Esto con el fin de asegurarnos genere el conjunto $T$.
+\\
+Y el resultado obtenido fue el siguiente:
+
+\begin{lstlisting}[language=bash, caption={Resultado de llaves candidatas.\\\hspace{\textwidth}}, captionpos=t]
+{'CEBA', 'CEBD'}
+T_set: {'C', 'D', 'B', 'A', 'E'}
+CEBA: {'C', 'D', 'B', 'A', 'E'}
+CEBD: {'C', 'D', 'B', 'A', 'E'}
+\end{lstlisting}
+
+
+
+\newpage
+
+\section{Conclusión}
+\begin{enumerate}
+\item Se debe partir siempre desde un conjunto de dependencias funcionales que este en su cobertura mínima. Esto reduce los procesos que realiza el algoritmo y asegura se genere la llave primaria, en caso de existir.
+\item Aunque el procesamiento en paralelo es una herramienta potente, se debe saber manejar. Ya que no siempre más hilos significa mejor desempeño.
+\item De las pruebas realizadas concluimos que es más frecuente encontrar llaves primarias que llaves candidatas, para conjuntos $L$ extensos.
+\end{enumerate}
+
+
+\newpage
+
+\renewcommand\refname{Bibliografía}
+
+%\begin{thebibliography}{9}
+
+%\bibitem[A]{aligica} P.D. Aligica. \textsl{Julian Simon and the “Limits to Growth” Neo-Malthusianism}, Electronic Journal of Sustainable Development, \textbf{1}, 3, (2009), pp. 73-84. (http://goo.gl/23G1Oo)
+
+%\bibitem[Au]{ausubel} J. H. Ausubel y P. S. Meyer. \textsl{Carrying Capacity: A Model with
+%Logistically Varying Limits, Technological Forecasting and Social Change},
+%\textbf{61}, 3, (1999), pp. 209-214. http://goo.gl/Lpc4g4
+
+%\bibitem[Al]{alvarez} N. Álvarez-Vázquez, P.A. Pérez y J. Rodríguez-Ruiz. \textsl{Métodos y
+%modelos matemáticos de la demografía}, (trabajo), Departamento de Economía
+%Aplicada Cuantitativa, UNED, Málaga, 1997. http://goo.gl/n1Z2nM
+
+%\bibitem[B]{bacaer} N. Bacaër. \textsl{A Short History of Mathematical Population Dynamics},
+%Springer-Verlag, Londres, 2011. http://goo.gl/1LhzMB
+
+%\bibitem[Ba]{banks} R. B. Banks. \textsl{Growth and Diffusion Phenomena: Mathematical
+%Frameworks and Applications}, Springer-Verlag, Berlín, 1994.
+
+
+%\end{thebibliography}
+
+
+\end{document}
+
+
+
